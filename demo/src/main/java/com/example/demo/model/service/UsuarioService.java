@@ -23,6 +23,6 @@ public class UsuarioService {
   			e.printStackTrace();
   			return ResponseEntity.badRequest().body("Não foi possivel realizar o cadastro");
   		}
-  	       return ResponseEntity.ok("Experiência deletada com sucesso");
+  	       return ResponseEntity.ok("Cadastro realizado com sucesso");
      }
 }
