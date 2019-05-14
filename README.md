@@ -1,2 +1,2 @@
 # Entrega_crud
-repostirio focado no estudo de crud
+repositório focado no estudo de crud
