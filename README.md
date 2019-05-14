@@ -1,2 +1,2 @@
-# Entrega_itau
-repostirio focado na entrega da primeira sprint para o itau
+# Entrega_crud
+repostirio focado no estudo de crud
