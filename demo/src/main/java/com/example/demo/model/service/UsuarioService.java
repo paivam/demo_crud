@@ -37,5 +37,15 @@ public class UsuarioService {
 	public ResponseEntity<?> listarUsuario() {
 		return ResponseEntity.ok().header("Content-Type", MediaType.APPLICATION_JSON.toString()).body(usuRepo.findAll());
 	}
+	
+	public ResponseEntity<?> atualizarUsuario(Long id, Usuario usu, HttpServletRequest request) {
+		Usuario usuario = usuRepo.findById(id).get();
+		usuario.setNome(usu.getNome());
+		usuario.setCPF(usu.getCPF());
+		usuario.setEmail(usu.getEmail());
+		usuario.setTelefone(usu.getTelefone());
+		usuRepo.save(usuario);
+		return ResponseEntity.ok(this.retorno.build(new Date(), "Cadastro realizado", "uri=" + request.getRequestURI()));
+	}
 
 }
