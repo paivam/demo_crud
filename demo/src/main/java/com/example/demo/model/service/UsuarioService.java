@@ -1,28 +1,28 @@
 package com.example.demo.model.service;
 
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.bean.Usuario;
 import com.example.demo.model.repository.UsuarioRepository;
 
+@Service
 public class UsuarioService {
 	
       @Autowired
       private UsuarioRepository usuRepo;
       
-      public ResponseEntity<?> cadastrarUsuario(Usuario uso, HttpServletRequest request) {
+      public ResponseEntity<Usuario> cadastrarUsuario(Usuario uso) {
   	    try { 
   	    	 
   	    	 usuRepo.save(uso);
-  	  
-  		}catch(Exception e){
+  	    	 return new ResponseEntity<Usuario>(uso, HttpStatus.OK); 
+  	    	 
+  	    }catch(Exception e){
   			e.printStackTrace();
-  			return ResponseEntity.badRequest().body("Não foi possivel realizar o cadastro");
+  			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
   		}
-  	       return ResponseEntity.ok("Cadastro realizado com sucesso");
      }
 }
