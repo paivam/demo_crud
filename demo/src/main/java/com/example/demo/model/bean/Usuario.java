@@ -1,7 +1,6 @@
 package com.example.demo.model.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,22 +16,21 @@ import javax.validation.constraints.NotBlank;
 public class Usuario implements Serializable {
   
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@NotBlank
-	private String nome; 
+	private String nome;
+	@NotBlank
 	@Email
-	@NotBlank
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
-	@Column(unique=true)
 	@NotBlank
+	@Column(unique = true)
 	private String CPF;
 	@NotBlank
-	private int telefone;
-	@NotBlank
-	private Date datanascimento;
+	private String telefone;
 	
 	public String getNome() {
 		return nome;
@@ -49,20 +47,14 @@ public class Usuario implements Serializable {
 	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCPF(String CPF) {
+		this.CPF = CPF;
 	}
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-	public Date getDatanascimento() {
-		return datanascimento;
-	}
-	public void setDatanascimento(Date datanascimento) {
-		this.datanascimento = datanascimento;
 	}
 	
 	public long getId() {
@@ -95,8 +87,7 @@ public class Usuario implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", CPF=" + CPF + ", telefone=" + telefone
-				+ ", datanascimento=" + datanascimento + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", CPF=" + CPF + ", telefone=" + telefone + "]";
 	}
 	
 	
