@@ -61,13 +61,12 @@ public class UsuarioService {
 	public ResponseEntity<?> deletarUsuario(Long id, HttpServletRequest request) {
 		try {
 			usuRepo.delete(usuRepo.findById(id).get());
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.badRequest()
 					.body(this.retorno.build(new Date(), "Usuário não cadastrado", "uri=" + request.getRequestURI()));
 		}
-		return ResponseEntity
-				.ok(this.retorno.build(new Date(), "Usuário deletado", "uri=" + request.getRequestURI()));
+		return ResponseEntity.ok(this.retorno.build(new Date(), "Usuário deletado", "uri=" + request.getRequestURI()));
 	}
 }

@@ -30,14 +30,15 @@ public class UsuarioController {
 
 	@GetMapping("/listarUsuario")
 	public ResponseEntity<?> buscarUsuario() {
-         return usuServ.listarUsuario();
+		return usuServ.listarUsuario();
 	}
-	
+
 	@PutMapping("/atualizarUsuario/{id}")
-	public ResponseEntity<?> atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usu, HttpServletRequest request) {
+	public ResponseEntity<?> atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usu,
+			HttpServletRequest request) {
 		return usuServ.atualizarUsuario(id, usu, request);
 	}
-	
+
 	@DeleteMapping("/deletarUsuario/{id}")
 	public ResponseEntity<?> deletarUsuario(@PathVariable("id") Long id, HttpServletRequest request) {
 		return usuServ.deletarUsuario(id, request);

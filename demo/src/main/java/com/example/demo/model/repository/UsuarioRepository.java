@@ -7,7 +7,7 @@ import com.example.demo.model.bean.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-	
+
 	public void findByNome(String nome);
 
 }
