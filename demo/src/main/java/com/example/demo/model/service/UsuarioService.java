@@ -39,13 +39,21 @@ public class UsuarioService {
 	}
 	
 	public ResponseEntity<?> atualizarUsuario(Long id, Usuario usu, HttpServletRequest request) {
-		Usuario usuario = usuRepo.findById(id).get();
-		usuario.setNome(usu.getNome());
-		usuario.setCPF(usu.getCPF());
-		usuario.setEmail(usu.getEmail());
-		usuario.setTelefone(usu.getTelefone());
-		usuRepo.save(usuario);
-		return ResponseEntity.ok(this.retorno.build(new Date(), "Cadastro realizado", "uri=" + request.getRequestURI()));
-	}
+		
+		Usuario usuario = usuRepo.findById(id).orElse(null);
+		
+		if(usuario != null) {
+          
+        	  usuario.setNome(usu.getNome());
+              usuario.setCPF(usu.getCPF());    		
+        	  usuario.setEmail(usu.getEmail());
+        	  usuario.setTelefone(usu.getTelefone());
+             usuRepo.save(usuario);
+          	 return ResponseEntity.ok(this.retorno.build(new Date(), "usuario atualizado", "uri=" + request.getRequestURI()));
+	}else
+		
+		return ResponseEntity.badRequest().body(this.retorno.build(new Date(), "Usuário não encontrado", "uri=" + request.getRequestURI()));
 
-}
+	}
+	
+}	
