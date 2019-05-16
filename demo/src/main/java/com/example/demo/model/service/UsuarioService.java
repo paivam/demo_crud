@@ -35,25 +35,39 @@ public class UsuarioService {
 	}
 
 	public ResponseEntity<?> listarUsuario() {
-		return ResponseEntity.ok().header("Content-Type", MediaType.APPLICATION_JSON.toString()).body(usuRepo.findAll());
+		return ResponseEntity.ok().header("Content-Type", MediaType.APPLICATION_JSON.toString())
+				.body(usuRepo.findAll());
 	}
-	
-	public ResponseEntity<?> atualizarUsuario(Long id, Usuario usu, HttpServletRequest request) {
-		
-		Usuario usuario = usuRepo.findById(id).orElse(null);
-		
-		if(usuario != null) {
-          
-        	  usuario.setNome(usu.getNome());
-              usuario.setCPF(usu.getCPF());    		
-        	  usuario.setEmail(usu.getEmail());
-        	  usuario.setTelefone(usu.getTelefone());
-             usuRepo.save(usuario);
-          	 return ResponseEntity.ok(this.retorno.build(new Date(), "usuario atualizado", "uri=" + request.getRequestURI()));
-	}else
-		
-		return ResponseEntity.badRequest().body(this.retorno.build(new Date(), "Usuário não encontrado", "uri=" + request.getRequestURI()));
 
+	public ResponseEntity<?> atualizarUsuario(Long id, Usuario usu, HttpServletRequest request) {
+
+		Usuario usuario = usuRepo.findById(id).orElse(null);
+
+		if (usuario != null) {
+
+			usuario.setNome(usu.getNome());
+			usuario.setCPF(usu.getCPF());
+			usuario.setEmail(usu.getEmail());
+			usuario.setTelefone(usu.getTelefone());
+			usuRepo.save(usuario);
+			return ResponseEntity
+					.ok(this.retorno.build(new Date(), "usuário atualizado", "uri=" + request.getRequestURI()));
+		} else
+
+			return ResponseEntity.badRequest()
+					.body(this.retorno.build(new Date(), "Usuário não encontrado", "uri=" + request.getRequestURI()));
 	}
-	
-}	
+
+	public ResponseEntity<?> deletarUsuario(Long id, HttpServletRequest request) {
+		try {
+			usuRepo.delete(usuRepo.findById(id).get());
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest()
+					.body(this.retorno.build(new Date(), "Usuário não cadastrado", "uri=" + request.getRequestURI()));
+		}
+		return ResponseEntity
+				.ok(this.retorno.build(new Date(), "Usuário deletado", "uri=" + request.getRequestURI()));
+	}
+}

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,10 @@ public class UsuarioController {
 	@PutMapping("/atualizarUsuario/{id}")
 	public ResponseEntity<?> atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usu, HttpServletRequest request) {
 		return usuServ.atualizarUsuario(id, usu, request);
+	}
+	
+	@DeleteMapping("/deletarUsuario/{id}")
+	public ResponseEntity<?> deletarUsuario(@PathVariable("id") Long id, HttpServletRequest request) {
+		return usuServ.deletarUsuario(id, request);
 	}
 }
