@@ -8,59 +8,68 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements Serializable {
-  
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@NotBlank
+	@NotNull
 	private String nome;
-	@NotBlank
+	@NotNull
 	@Column(unique = true)
 	private String email;
-	@NotBlank
+	@NotNull
 	@Column(unique = true)
 	private String CPF;
-	@NotBlank
-	private String telefone;
-	
+	@NotNull
+	private int telefone;
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getCPF() {
 		return CPF;
 	}
+
 	public void setCPF(String CPF) {
 		this.CPF = CPF;
 	}
-	public String getTelefone() {
+
+	public int getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(String telefone) {
+
+	public void setTelefone(int telefone) {
 		this.telefone = telefone;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,7 +77,7 @@ public class Usuario implements Serializable {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -82,11 +91,11 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", CPF=" + CPF + ", telefone=" + telefone + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", CPF=" + CPF + ", telefone=" + telefone
+				+ "]";
 	}
-	
-	
+
 }
