@@ -43,4 +43,10 @@ public class UsuarioController {
 	public ResponseEntity<?> deletarUsuario(@PathVariable("id") Long id, HttpServletRequest request) {
 		return usuServ.deletarUsuario(id, request);
 	}
+	
+	@GetMapping("/listarUsuarioNome/{nome}")
+	public ResponseEntity<?> buscarUsuarioNome(@PathVariable("nome") String nome, HttpServletRequest request) {
+		return usuServ.buscarUsuarioPorNome(nome, request);
+	}
 }
+

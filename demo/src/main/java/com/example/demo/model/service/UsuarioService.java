@@ -2,6 +2,7 @@ package com.example.demo.model.service;
 
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,5 +69,14 @@ public class UsuarioService {
 					.body(this.retorno.build(new Date(), "Usuário não cadastrado", "uri=" + request.getRequestURI()));
 		}
 		return ResponseEntity.ok(this.retorno.build(new Date(), "Usuário deletado", "uri=" + request.getRequestURI()));
+	}
+
+	public ResponseEntity<?> buscarUsuarioPorNome(String nome, HttpServletRequest request) {
+		List<Usuario> usu = usuRepo.findAllByNomeIgnoreCase(nome);
+		if (usu != null && !usu.isEmpty()) {
+			return ResponseEntity.ok().header("Content-Type", MediaType.APPLICATION_JSON.toString()).body(usu);
+		} else
+			return ResponseEntity.badRequest()
+					.body(this.retorno.build(new Date(), "Usuário não cadastrado", "uri=" + request.getRequestURI()));
 	}
 }
