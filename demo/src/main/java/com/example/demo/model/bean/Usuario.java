@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -23,7 +22,6 @@ public class Usuario implements Serializable {
 	@NotBlank
 	private String nome;
 	@NotBlank
-	@Email
 	@Column(unique = true)
 	private String email;
 	@NotBlank
