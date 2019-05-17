@@ -26,13 +26,17 @@ public class UsuarioService {
 	private DetalhesRetorno retorno;
 
 	public ResponseEntity<?> cadastrarUsuario(Usuario uso, HttpServletRequest request) {
-
 		Usuario t = usuRepo.save(uso);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(t.getId()).toUri();
+		if (t == null) {
+			return ResponseEntity.badRequest().body(this.retorno.build(new Date(), "Todos os campos devem preenchidos",
+					"uri=" + request.getRequestURI()));
+		} else {
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(t.getId())
+					.toUri();
+			return ResponseEntity.created(uri)
+					.body(this.retorno.build(new Date(), "Cadastro realizado", "uri=" + request.getRequestURI()));
 
-		return ResponseEntity.created(uri)
-				.body(this.retorno.build(new Date(), "Cadastro realizado", "uri=" + request.getRequestURI()));
-
+		}
 	}
 
 	public ResponseEntity<?> listarUsuario() {
@@ -44,19 +48,19 @@ public class UsuarioService {
 
 		Usuario usuario = usuRepo.findById(id).orElse(null);
 
-		if (usuario != null) {
-
-			usuario.setNome(usu.getNome());
-			usuario.setCPF(usu.getCPF());
-			usuario.setEmail(usu.getEmail());
-			usuario.setTelefone(usu.getTelefone());
-			usuRepo.save(usuario);
-			return ResponseEntity
-					.ok(this.retorno.build(new Date(), "usuário atualizado", "uri=" + request.getRequestURI()));
-		} else
-
+		if (usuario == null) {
 			return ResponseEntity.badRequest()
 					.body(this.retorno.build(new Date(), "Usuário não encontrado", "uri=" + request.getRequestURI()));
+
+		} else
+			usuario.setNome(usu.getNome());
+		usuario.setCPF(usu.getCPF());
+		usuario.setEmail(usu.getEmail());
+		usuario.setTelefone(usu.getTelefone());
+		usuRepo.save(usuario);
+		return ResponseEntity
+				.ok(this.retorno.build(new Date(), "usuário atualizado", "uri=" + request.getRequestURI()));
+
 	}
 
 	public ResponseEntity<?> deletarUsuario(Long id, HttpServletRequest request) {

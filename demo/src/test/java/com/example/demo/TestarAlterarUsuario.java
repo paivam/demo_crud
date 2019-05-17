@@ -21,16 +21,16 @@ public class TestarAlterarUsuario {
 		uso.setId(99);
 		Usuario usu = usoRepo.findById(uso.getId()).orElse(null);
 
-		if (usu != null) {
-			usu.setCPF("12345977901");
-			usu.setEmail("hojee@amanha.com");
-			usu.setNome("gori");
-			usu.setTelefone(12456780);
+		if (usu == null) {
+			System.out.println("Usuario não cadastrado");		
+		}else
+		usu.setCPF("59623215963");
+		usu.setEmail("gabriel@amanha.com");
+		usu.setNome("gabriel");
+		usu.setTelefone(982391036);
 
-			usoRepo.save(usu);
-			System.out.println(usu);
+		usoRepo.save(usu);
+		System.out.println(usu);
 
-		}
-	     System.out.println("Usuario não cadastrado");
 	}
 }
