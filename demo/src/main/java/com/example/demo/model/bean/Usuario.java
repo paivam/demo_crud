@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -23,11 +24,11 @@ public class Usuario implements Serializable {
 	private String nome;
 	@NotNull
 	@Column(unique = true)
+	@NotBlank
 	private String email;
 	@NotNull
 	@Column(unique = true)
 	private String CPF;
-	@NotNull
 	private int telefone;
 
 	public String getNome() {
@@ -35,6 +36,9 @@ public class Usuario implements Serializable {
 	}
 
 	public void setNome(String nome) {
+		if (nome.equals("")) {
+			nome = null;
+		}
 		this.nome = nome;
 	}
 
@@ -43,6 +47,9 @@ public class Usuario implements Serializable {
 	}
 
 	public void setEmail(String email) {
+		if (email.equals("")) {
+			email = null;
+		}
 		this.email = email;
 	}
 
@@ -51,6 +58,9 @@ public class Usuario implements Serializable {
 	}
 
 	public void setCPF(String CPF) {
+		if (CPF.equals("")) {
+			CPF = null;
+		}
 		this.CPF = CPF;
 	}
 

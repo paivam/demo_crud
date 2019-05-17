@@ -15,13 +15,14 @@ public class TestarCadastarUsuario {
 	@Autowired
 	private UsuarioRepository usorepo;
 	
+	
 	@Test
 	public void cadastrarUsuario() {
 		Usuario uso = new Usuario();
-		  uso.setCPF("18759687459");
-		  uso.setEmail("fernanda@gamil.com");
-		  uso.setTelefone(985868523);
-		  uso.setNome("Fernanda");
+		  uso.setCPF("4544545");
+		  uso.setEmail("matahues@gmialo.vom");
+		  uso.setTelefone(95210262);
+		  uso.setNome("Fernan");
 		  
 		  usorepo.save(uso);
 		  System.out.println(uso.getId());
