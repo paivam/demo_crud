@@ -19,10 +19,10 @@ public class TestarCadastarUsuario {
 	@Test
 	public void cadastrarUsuario() {
 		Usuario uso = new Usuario();
-		  uso.setCPF("4544545");
-		  uso.setEmail("matahues@gmialo.vom");
-		  uso.setTelefone(95210262);
-		  uso.setNome("Fernan");
+		  uso.setCPF("46626622811");
+		  uso.setEmail("matheus.paiva@hotmail.com");
+		  uso.setTelefone("1195210262");
+		  uso.setNome("Matheus");
 		  
 		  usorepo.save(uso);
 		  System.out.println(uso.getId());

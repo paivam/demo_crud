@@ -18,16 +18,16 @@ public class TestarAlterarUsuario {
 	@Test
 	public void AlterarUsuario() {
 		Usuario uso = new Usuario();
-		uso.setId(99);
+		uso.setId(1);
 		Usuario usu = usoRepo.findById(uso.getId()).orElse(null);
 
 		if (usu == null) {
 			System.out.println("Usuario não cadastrado");		
 		}else
-		usu.setCPF("59623215963");
-		usu.setEmail("gabriel@amanha.com");
-		usu.setNome("gabriel");
-		usu.setTelefone(982391036);
+		usu.setCPF("466.266.228-11");  
+		usu.setEmail("");
+		usu.setNome("Matheus");
+		usu.setTelefone("11952105262");
 
 		usoRepo.save(usu);
 		System.out.println(usu);
