@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "Usuario")
@@ -24,12 +26,14 @@ public class Usuario implements Serializable {
 	private String nome;
 	@NotNull
 	@Column(unique = true)
-	@NotBlank
+	@Email
 	private String email;
 	@NotNull
 	@Column(unique = true)
-	private String CPF;
-	private int telefone;
+	@CPF
+	private String cpf;
+	@NotNull
+	private String telefone;
 
 	public String getNome() {
 		return nome;
@@ -53,22 +57,25 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCPF(String CPF) {
-		if (CPF.equals("")) {
-			CPF = null;
+	public void setCPF(String cpf) {
+		if (cpf.equals("")) {
+			cpf = null;
 		}
-		this.CPF = CPF;
+		this.cpf = cpf;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
+		if (telefone.equals("")) {
+			telefone = null;
+		}
 		this.telefone = telefone;
 	}
 
@@ -104,7 +111,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", CPF=" + CPF + ", telefone=" + telefone
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", CPF=" + cpf + ", telefone=" + telefone
 				+ "]";
 	}
 
