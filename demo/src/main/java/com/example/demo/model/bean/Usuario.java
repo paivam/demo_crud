@@ -35,6 +35,20 @@ public class Usuario implements Serializable {
 	@NotNull
 	private String telefone;
 
+	public Usuario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Usuario(@NotNull String nome, @NotNull @Email String email, @NotNull @CPF String cpf,
+			@NotNull String telefone) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.cpf = cpf;
+		this.telefone = telefone;
+	}
+
 	public String getNome() {
 		return nome;
 	}
