@@ -1,0 +1,103 @@
+#%RAML 1.0
+title: CRUD API
+version: v1
+baseUri: http://http://localhost:8080
+mediaType: application/json
+
+types:
+  Usuario: |
+    {
+      "nome": {
+        "type": "string",
+        "required": true
+      },
+      "email": {
+        "type": "string",
+        "required": true,
+        "unique": true
+      },
+      "CPF": {
+        "type": "string",
+        "required": true,
+        "unique": true
+      },
+      "telefone": {
+        "type": "string",
+        "required": true
+      }
+    }
+        
+/api:
+  /cadastrarUsuario:
+    post:
+      description: Cadastra um novo usuario
+      responses:
+       201:
+         body: 
+            application/json:
+              type: Usuario
+              example: |
+                {
+                  "nome": "Victor",
+                  "email": "vi@gmail.com",
+                  "telefone": 11445588774,
+                  "cpf": "25225225214"
+                }
+       400:
+         description: Usuário já cadastrado.
+         body:
+           properties:
+             error: string
+  /listarUsuario:
+    get:
+      description: Obtém coleção de usuários.
+      responses:
+        200:
+          body: []
+  /listarUsuarioNome:
+    /{nome}:
+      get:
+        description: Obtém coleção de usuários pelo nome.
+        responses:
+          200:
+            body: []  
+          400:
+           description: Usuário não cadastrado.
+           body:
+             properties:
+               error: string
+  /atualizarUsuario:
+    /{id}:
+      put:
+        
+        description: Atualiza usuário especifico.
+        responses:
+         200:
+           body: 
+              application/json:
+                type: Usuario
+                example: |
+                  {
+                    "nome": "Victor",
+                    "email": "vi@gmail.com",
+                    "telefone": 11445588774,
+                    "cpf": "25225225214"
+                  }
+         400:
+           description: Usuário não encontrado.
+           body:
+             properties:
+               error: string
+  /deletarUsuario:
+    /{id}:
+      delete:
+        description: Deleta usuário pelo id.
+        responses:
+          200:
+            description: Confirma que o usuário foi deletado.
+          400:
+           description: Usuário não cadastrado.
+           body:
+             properties:
+               error: string
+      
