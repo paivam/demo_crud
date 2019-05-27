@@ -17,13 +17,8 @@ public class UsuarioService {
 	private UsuarioRepository usuRepo;
 
 	public ResponseEntity<?> cadastrarUsuario(Usuario uso) {
-		try {
-			usuRepo.save(uso);
-			
-			return ResponseEntity.ok("Cadastro Realizado");
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Dados invalidos");
-		}
+		usuRepo.save(uso);
+		return ResponseEntity.ok("Cadastro Realizado");
 	}
 
 	public ResponseEntity<?> listarUsuario() {
@@ -32,30 +27,24 @@ public class UsuarioService {
 	}
 
 	public ResponseEntity<?> atualizarUsuario(Long id, Usuario usu) {
-		try {
-			Usuario usuario = usuRepo.findById(id).orElse(null);
-			if (usu != null) {
-				usuario.setNome(usu.getNome());
-				usuario.setCPF(usu.getCpf());
-				usuario.setEmail(usu.getEmail());
-				usuario.setTelefone(usu.getTelefone());
-				usuRepo.save(usuario);
-			}
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Usuario não encontrado");
+		Usuario usuario = usuRepo.findById(id).orElse(null);
+
+		if (usu != null) {
+
+			usuario.setNome(usu.getNome());
+			usuario.setCPF(usu.getCpf());
+			usuario.setEmail(usu.getEmail());
+			usuario.setTelefone(usu.getTelefone());
+			usuRepo.save(usuario);
 		}
 		return ResponseEntity.ok("Usuario Atualizado");
-
 	}
 
 	public ResponseEntity<?> deletarUsuario(Long id) {
-		try {
-			usuRepo.delete(usuRepo.findById(id).get());
+		usuRepo.delete(usuRepo.findById(id).get());
 
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Usuario não cadastrado");
-		}
 		return ResponseEntity.ok("Usuario deletado com sucesso");
+
 	}
 
 	public ResponseEntity<?> buscarUsuarioPorNome(String nome) {

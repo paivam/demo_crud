@@ -34,5 +34,6 @@ public class BuscarNomeInvalidosTests {
 		Usuario uso = list.get(0);
 		uso.setNome("Matheus");;
 		usuContro.buscarUsuarioNome(uso.getNome());
+		
 	}
 }
